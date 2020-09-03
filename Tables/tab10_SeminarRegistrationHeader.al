@@ -319,6 +319,7 @@ table 50110 "CSD Seminar Reg. Header"
     {
         key(PK; "No.")
         {
+            Clustered=true;
         }
         key(Key2; "Room Resource No.")
         {
