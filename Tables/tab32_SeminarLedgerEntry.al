@@ -3,8 +3,15 @@ table 50132 "CSD Seminar Ledger Entry"
     // CSD1.00 - 2018-01-01 - D. E. Veloper
     //   Chapter 7 - Lab 1 - 3
     //     - Created new table
+    //   Chapter 8 - Lab 2 - 1
+    //   Added key2
+    //   Chapter 8 - Lab 2 - 3
+    //   Added LookupPageId & DrilldownPageId properties
+
 
     Caption = 'Seminar Ledger Entry';
+    LookupPageId = "CSD Seminar Ledger Entries";
+    DrillDownPageId = "CSD Seminar Ledger Entries";
 
     fields
     {
@@ -104,13 +111,13 @@ table 50132 "CSD Seminar Ledger Entry"
         field(17; "Room Resource No."; Code[20])
         {
             Caption = 'Room Resource No.';
-            TableRelation = Resource where (Type = const (Machine));
+            TableRelation = Resource where(Type = const(Machine));
             DataClassification = AccountData;
         }
         field(18; "Instructor Resource No."; Code[20])
         {
             Caption = 'Instructor Resource No.';
-            TableRelation = Resource where (Type = const (Person));
+            TableRelation = Resource where(Type = const(Person));
             DataClassification = AccountData;
         }
         field(19; "Starting Date"; Date)
@@ -139,13 +146,13 @@ table 50132 "CSD Seminar Ledger Entry"
         field(23; "Source No."; Code[20])
         {
             Caption = 'Source No.';
-            TableRelation = if ("Source Type" = const (Seminar)) "CSD Seminar";
+            TableRelation = if ("Source Type" = const(Seminar)) "CSD Seminar";
             DataClassification = AccountData;
         }
         field(24; "Journal Batch Name"; Code[10])
         {
-            Caption = 'Journal Batch Name';
             DataClassification = AccountData;
+            Caption = 'Journal Batch Name';
         }
         field(25; "Source Code"; Code[10])
         {
@@ -168,10 +175,9 @@ table 50132 "CSD Seminar Ledger Entry"
         }
         field(28; "User Id"; code[50])
         {
-            TableRelation = user where ("User Name" = field ("User Id"));
+            TableRelation = user where("User Name" = field("User Id"));
             ValidateTableRelation = false;
             DataClassification = AccountData;
-
             trigger OnLookup();
             var
                 UserMgt: Codeunit "User Management";
@@ -186,6 +192,13 @@ table 50132 "CSD Seminar Ledger Entry"
         key(Key1; "Entry No.")
         {
         }
+        key(key2; "Document No.", "Posting Date")
+        {
+        }
+    }
+
+    fieldgroups
+    {
     }
 }
 

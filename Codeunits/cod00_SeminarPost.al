@@ -7,6 +7,8 @@ codeunit 50100 "CSD Seminar-Post"
     TableNo = 50110;
 
     trigger OnRun();
+    var
+        ChargeType: Option Instructor,Room,Participant,Charge;
     begin
         ClearAll();
         SeminarRegHeader := Rec;
@@ -63,7 +65,7 @@ codeunit 50100 "CSD Seminar-Post"
                     end;
 
                     // Post seminar entry 
-                    PostSeminarJnlLine(2); // Participant
+                    PostSeminarJnlLine(ChargeType::Participant); // Participant
 
                     // Insert()  posted seminar registration line 
                     PstdSeminarRegLine.Init();
